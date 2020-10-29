@@ -31,7 +31,14 @@ namespace Craunch
 
         private void BrowseClick(object sender, EventArgs e)
         {
+            string folder = Program.EXE;
+            folder = folder.Substring(0, folder.LastIndexOf('\\') + 1);
 
+            using (var dialog = new OpenFileDialog { InitialDirectory = folder, Filter = "Programs (*.exe)|*.exe", FilterIndex = 0, RestoreDirectory = true })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                    tboxPath.Text = dialog.FileName;
+            }
         }
 
         private void EncryptClick(object sender, EventArgs e)
